@@ -5,17 +5,33 @@ function Animal(animal) {
   this.image_url = animal.image_url;
   this.description = animal.description;
   this.keyword= animal.keyword;
-  this.horns =animal.horns
-  
+  this.horns =animal.horns;
+  selectKeyword.push(animal.keyword);
+
   //loop over array, extract elements, render over page
 }
+
+let selectKeyword=[];
+console.log('selectKeyword', this.keyword);
+
+//console.log('select keyword', selectKeyword);
 Animal.allAnimals = [];
+
+// Animal.prototype.renderKeyword = function () {
+  
+//   $('option').append('<li class="list"></li>');
+//    for(let i =0; i< animal.length;i++){
+//     $('<option/>').val(Animal.this.keyword[i]).html(Animal.this.keyword[i]).appendTo('#list');
+//   }
+
+// }
 
 Animal.prototype.render = function () {//does nothing more than take data and render on time
   $('main').append('<div class="clone"></div>'); // add to dom
   let animalClone = $('div[class="clone"]'); //read what there
   let animalHtml = $('#animal-template').html(); //
   animalClone.html(animalHtml);
+  
 
   animalClone.find('h2').text(this.title);
   animalClone.find('img').attr('src', this.image_url); //there are other ways to grab image
@@ -23,7 +39,7 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   animalClone.find('p').text(this.keyword);
   animalClone.find('p').text(this.horns);
   animalClone.removeClass('clone');
-  animalClone.attr('class', this.title);
+  animalClone.attr('class', this.keyword);
 }
 
 Animal.readJSON = () => {
@@ -44,3 +60,12 @@ Animal.loadAnimals = () => { //function that actually renders dogs on page where
 }
 
 $(() => Animal.readJSON());// anonymous function that kicks everything off
+
+$('select').on('click',function() {
+  let selectAnimal = $('option');
+  let selectedAnimal= selectAnimal.val();
+  $('main').append(`<div class="clone">${selectedAnimal}</div>`); 
+  selectAnimal.val('');
+});
+
+
