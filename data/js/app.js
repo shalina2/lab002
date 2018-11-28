@@ -1,20 +1,12 @@
 'use strict';
-
 function Animal(animal) {
   this.title = animal.name;
   this.image_url = animal.image_url;
   this.description = animal.description;
   this.keyword= animal.keyword;
   this.horns =animal.horns;
-  // selectKeyword.push(animal.keyword);
-
-  //loop over array, extract elements, render over page
 }
-
-
 Animal.allAnimals = [];
-
-
 Animal.prototype.render = function () {//does nothing more than take data and render on time
   $('main').append('<div class="clone"></div>'); // add to dom
   let animalClone = $('div[class="clone"]'); //read what there
@@ -31,7 +23,6 @@ Animal.prototype.render = function () {//does nothing more than take data and re
 Animal.renderKeyword = function () {
   let selectKeyword=[];
   Animal.allAnimals.forEach( animal=>{
-    
   if ( !selectKeyword.includes(animal.keyword)) {
       $('select').append('<option class="clone"></option>');
       let $opt = $('option[class="clone"]');
@@ -41,11 +32,7 @@ Animal.renderKeyword = function () {
     }
   })
 }
-
 Animal.readJSON = () => {
-  // $.get('data.json', 'json', function(data) {
-
-  // }) // old way
   $.get('page-1.json', 'json') //get request to JSON file within directory, second argument the type of data
     .then(data => { //once you get data, do this
       data.forEach(obj => { //iterate over each place in array, then create new object
@@ -54,13 +41,10 @@ Animal.readJSON = () => {
     })
     .then(Animal.loadAnimals).then(Animal.renderKeyword)//will invoke as soon as ready on its own, no invocation needed
 }
-
 Animal.loadAnimals = () => { //function that actually renders dogs on page whereas render piece deals with dom
   Animal.allAnimals.forEach(animal => animal.render());
 }
-
 $(() => Animal.readJSON());// anonymous function that kicks everything off
-
 $('select').on('change',function() {
   let selectedAnimal= $(this).val();
   $(`div`).not('.'+selectedAnimal).hide();
