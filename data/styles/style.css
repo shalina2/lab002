@@ -1,0 +1,16 @@
+h1 {
+  font-size: 10vw;
+}
+select {
+  height: 4vw;
+}
+div {
+   width: 250px;
+  height: 250px;
+  display: flex;
+  flex-flow: row wrap;
+
+}
+div #container {
+  width: 500px;
+}
