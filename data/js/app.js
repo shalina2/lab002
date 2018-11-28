@@ -62,10 +62,9 @@ Animal.loadAnimals = () => { //function that actually renders dogs on page where
 $(() => Animal.readJSON());// anonymous function that kicks everything off
 
 $('select').on('change',function() {
-  let selectAnimal = $('main');
-  let selectedAnimal= selectAnimal.val();
-  $('main').append(`<div class="clone">${selectedAnimal}</div>`); 
-  selectAnimal.val('');
+  let selectedAnimal= $(this).val();
+  $(`div`).not('.'+selectedAnimal).hide();
+  $('.'+selectedAnimal).show();
 });
 
 
