@@ -20,15 +20,15 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   animalClone.removeClass('clone');
   animalClone.attr('class', this.keyword);
 }
-Animal.renderKeyword = function () {
-  let selectKeyword=[];
-  Animal.allAnimals.forEach( animal=>{
+Animal.renderKeyword = function () { //renders keyword into selector
+  let selectKeyword=[]; //empty array for selected keyword
+  Animal.allAnimals.forEach( animal=>{ //for each designed to itterate over object array and identify keyword
   if ( !selectKeyword.includes(animal.keyword)) {
-      $('select').append('<option class="clone"></option>');
-      let $opt = $('option[class="clone"]');
-      $opt.text(animal.keyword);
-      selectKeyword.push(animal.keyword);
-      $opt.removeClass('clone');
+      $('select').append('<option class="clone"></option>'); //appends each keyword to selection
+      let $opt = $('option[class="clone"]'); //$ essential for jQuery identifier
+      $opt.text(animal.keyword); //places text on selector
+      selectKeyword.push(animal.keyword); //pushes keyword to empty array
+      $opt.removeClass('clone'); //removes to set stage for next keyword
     }
   })
 }
@@ -45,10 +45,10 @@ Animal.loadAnimals = () => { //function that actually renders dogs on page where
   Animal.allAnimals.forEach(animal => animal.render());
 }
 $(() => Animal.readJSON());// anonymous function that kicks everything off
-$('select').on('change',function() {
-  let selectedAnimal= $(this).val();
-  $(`div`).not('.'+selectedAnimal).hide();
-  $('.'+selectedAnimal).show();
+$('select').on('change',function() { //event delegatrion
+  let selectedAnimal= $(this).val(); //variable that holds selected value
+  $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
+  $('.'+selectedAnimal).show(); //shows what is selected
 });
 
 
