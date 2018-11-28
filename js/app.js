@@ -33,7 +33,7 @@ Animal.renderKeyword = function () {
   })
 }
 Animal.readJSON = () => {
-  $.get('page-1.json', 'json') //get request to JSON file within directory, second argument the type of data
+  $.get('./data/page-1.json', 'json') //get request to JSON file within directory, second argument the type of data
     .then(data => { //once you get data, do this
       data.forEach(obj => { //iterate over each place in array, then create new object
         Animal.allAnimals.push(new Animal(obj))
