@@ -17,9 +17,9 @@ Estimate of time needed to complete: ___2 hrs__
 
 Start time: __9:40 am___
 
-Finish time: _____
+Finish time: _12:15pm____
 
-Actual time needed to complete: _____
+Actual time needed to complete: __2.45hrs___
 
 
 
@@ -27,7 +27,7 @@ Number and name of feature: #3 Style the Application
 
 Estimate of time needed to complete: _1 hr____
 
-Start time: _____
+Start time: __12:45pm___
 
 Finish time: _____
 
