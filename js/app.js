@@ -13,7 +13,7 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   let animalHtml = $('#animal-template').html(); //
   animalClone.html(animalHtml);
   animalClone.find('h2').text(this.title);
-  animalClone.find('img').attr('src', this.image_url); //there are other ways to grab image
+  animalClone.find('img').attr('src', this.image_url);//there are other ways to grab image
   animalClone.find('p').text(this.description);
   // animalClone.find('p').text(this.keyword);
   // animalClone.find('p').text(this.horns);
