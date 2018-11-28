@@ -1,6 +1,6 @@
 'use strict';
 function Animal(animal) {
-  this.title = animal.name;
+  this.title = animal.title;
   this.image_url = animal.image_url;
   this.description = animal.description;
   this.keyword= animal.keyword;
@@ -15,8 +15,8 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   animalClone.find('h2').text(this.title);
   animalClone.find('img').attr('src', this.image_url); //there are other ways to grab image
   animalClone.find('p').text(this.description);
-  animalClone.find('p').text(this.keyword);
-  animalClone.find('p').text(this.horns);
+  // animalClone.find('p').text(this.keyword);
+  // animalClone.find('p').text(this.horns);
   animalClone.removeClass('clone');
   animalClone.attr('class', this.keyword);
 }
