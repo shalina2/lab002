@@ -1,37 +1,59 @@
 *{
   box-sizing: border-box; 
 }
-body {
-  padding-left: 7vw;
-  padding-right: 5vw;
+html,body {
+  height:100%;
+}
+
+body{
+  display:flex;
+  flex-direction: column;
+  
 }
 h1 {
   font-family: 'Ceviche One', cursive;
   font-size: 50px;
-  text-align: center;
+  text-align: column;
 }
 select {
-  margin:0px auto
+  margin:0px auto;
+  flex:1;
 }
 h2{
   font-family: 'Ceviche One', cursive;
   font-size: 24px;
   margin-top: 12px;
   margin-bottom: 12px;
-  text-align: center;
+  text-align: column;
 }
 p{  
   font-family: 'Ceviche One', cursive;
   font-size: 24px;
-  text-align: center;
+  text-align: column;
   
 }
 div {
-  float:left;
+  flex-direction:column;
   margin:30px;
-  width: 250px;
-  height: 250px;
+  max-width: 30%;
+  height: 20%;
   padding:35px;
+}
+
+.flex-container {
+  max-width: 100%;
+  margin-top: 1em;
+  display:flex;
+  flex-direction: column;
+  flex-flow: column wrap;
+  align-content: flex-start;
+}
+
+img {
+  flex-direction: column;
+  margin :auto;
+  max-width:100%;
+  max-height:100%;
 }
 footer {
   text-align: center;
@@ -39,9 +61,3 @@ footer {
   padding-top: 60px;
   padding-bottom: 30px;
 }
-img {
-  margin :auto;
-  max-width:100%;
-  max-height:100%;
-}
-
