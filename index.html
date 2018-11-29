@@ -3,6 +3,12 @@
   <head>
     <title>The Gallery of Horns</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script id="animal-template" type="text/x-handlebars-template">
+      <div></div>
+        <h2>{{ title }}</h2>
+        <img {{ image_url }}>
+        <p>{{ description }}</p>
+      </section></script>
     <link rel="stylesheet" href="styles/reset.css">
     <link href="https://fonts.googleapis.com/css?family=Ceviche+One" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
@@ -15,18 +21,14 @@
       </select>
     </header>
     <main>
-      
-      <section id="animal-template">
-        <h2></h2>
-        <img src="" alt="">
-        <p></p>
-        
-      </section>
-      
+        <section id="animal-render">
+          
+        </section>
     </main>
     <footer>
       &copy; 2018 Code Fellows
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script
