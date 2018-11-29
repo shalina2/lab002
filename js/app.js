@@ -61,11 +61,10 @@ $('select').on('change',function() { //event delegatrion
   $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
   $('.'+selectedAnimal).show(); //shows what is selected
 });
-// $('#file1').on('click',function() { //event delegatrion
-//   let selectedAnimal= $(this).val(); //variable that holds selected value
-//   $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
-//   $('.'+selectedAnimal).show(); //shows what is selected
-// });
+$('#file1').on('click',function() { //event delegatrion
+  let selectP1 = $(this).val();
+  $('./data/page-2.json').hide();
+});
 
 
 
