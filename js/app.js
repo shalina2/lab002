@@ -15,16 +15,14 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   animalClone.find('h2').text(this.title);
   animalClone.find('img').attr('src', this.image_url);//there are other ways to grab image
   animalClone.find('p').text(this.description);
-  // animalClone.find('p').text(this.keyword);
-  // animalClone.find('p').text(this.horns);
   animalClone.removeClass('clone');
   animalClone.attr('class', this.keyword);
 }
-// Animal.prototype.toHtml = function() {
-//   const $template = $('#animal-render').html();
-//   const $source = Handlebars.compile($template);
-//   return $source(this);
-// }
+Animal.prototype.toHtml = function() {
+  const $template = $('#animal-render').html();
+  const $source = Handlebars.compile($template);
+  return $source(this);
+}
 Animal.renderKeyword = function () { //renders keyword into selector
   let selectKeyword=[]; //empty array for selected keyword
   Animal.allAnimals.forEach( animal=>{ //for each designed to itterate over object array and identify keyword
@@ -38,13 +36,18 @@ Animal.renderKeyword = function () { //renders keyword into selector
   })
 }
 Animal.readJSON = () => {
-  $.get('./data/page-1.json', 'json') //get request to JSON file within directory, second argument the type of data
+  $.get('./data/page-1.json', 'json')
+   //get request to JSON file within directory, second argument the type of data
     .then(data => { //once you get data, do this
       data.forEach(obj => { //iterate over each place in array, then create new object
         Animal.allAnimals.push(new Animal(obj))
       })
     })
-    $.get('./data/page-2.json', 'json')
+    .then(Animal.loadAnimals).then(Animal.renderKeyword)
+}
+Animal.readJSON2 = () => {
+  $.get('./data/page-2.json', 'json')
+   //get request to JSON file within directory, second argument the type of data
     .then(data => { //once you get data, do this
       data.forEach(obj => { //iterate over each place in array, then create new object
         Animal.allAnimals.push(new Animal(obj))
@@ -56,14 +59,34 @@ Animal.loadAnimals = () => { //function that actually renders dogs on page where
   Animal.allAnimals.forEach(animal => animal.render());
 }
 $(() => Animal.readJSON());
-$('select').on('change',function() { //event delegatrion
+$('select').on('change',function() {
   let selectedAnimal= $(this).val(); //variable that holds selected value
   $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
-  $('.'+selectedAnimal).show(); //shows what is selected
+  $('.'+selectedAnimal).show();//shows what is selected
 });
-$('#file1').on('click',function() { //event delegatrion
-  let selectP1 = $(this).val();
-  $('./data/page-2.json').hide();
+$('#file1').on('click',function() {
+  $('div').remove();
+  $('option').remove();
+  Animal.allAnimals = [];
+  $.get('./data/page-1.json', 'json')
+    .then(data => { 
+      data.forEach(obj => { 
+        Animal.allAnimals.push(new Animal(obj))
+      })
+    })
+    .then(Animal.loadAnimals).then(Animal.renderKeyword)
+});
+$('#file2').on('click',function() {
+  $('div').remove();
+  $('option').remove();
+  Animal.allAnimals = [];
+  $.get('./data/page-2.json', 'json')
+  .then(data => { 
+    data.forEach(obj => { 
+      Animal.allAnimals.push(new Animal(obj))
+    })
+  })
+  .then(Animal.loadAnimals).then(Animal.renderKeyword)
 });
 
 
