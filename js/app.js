@@ -20,16 +20,11 @@ Animal.prototype.render = function () {//does nothing more than take data and re
   animalClone.removeClass('clone');
   animalClone.attr('class', this.keyword);
 }
-
-Animal.prototype.toHtml = function() {
-  const $template = $('#animal-template').html();
-  const $source = Handlebars.compile($template);
-  return $source(this);
-}
-Animal.allAnimals.forEach(function(AnimalObject) {
-  Animal.allAnimals.push(new Animal(AnimalObject))
-});
-
+// Animal.prototype.toHtml = function() {
+//   const $template = $('#animal-render').html();
+//   const $source = Handlebars.compile($template);
+//   return $source(this);
+// }
 Animal.renderKeyword = function () { //renders keyword into selector
   let selectKeyword=[]; //empty array for selected keyword
   Animal.allAnimals.forEach( animal=>{ //for each designed to itterate over object array and identify keyword
@@ -42,32 +37,35 @@ Animal.renderKeyword = function () { //renders keyword into selector
     }
   })
 }
-Animal.allAnimals.forEach(keyword => {
-  $('#animal-render').append(keyword.toHtml());
-});
 Animal.readJSON = () => {
-  $.get('./data/page-1.json', './data/page-2.json', 'json') //get request to JSON file within directory, second argument the type of data
+  $.get('./data/page-1.json', 'json') //get request to JSON file within directory, second argument the type of data
     .then(data => { //once you get data, do this
       data.forEach(obj => { //iterate over each place in array, then create new object
         Animal.allAnimals.push(new Animal(obj))
       })
     })
-    .then(Animal.loadAnimals).then(Animal.renderKeyword)//will invoke as soon as ready on its own, no invocation needed
+    $.get('./data/page-2.json', 'json')
+    .then(data => { //once you get data, do this
+      data.forEach(obj => { //iterate over each place in array, then create new object
+        Animal.allAnimals.push(new Animal(obj))
+      })
+    })
+    .then(Animal.loadAnimals).then(Animal.renderKeyword)
 }
 Animal.loadAnimals = () => { //function that actually renders dogs on page whereas render piece deals with dom
-  Animal.allAnimals.forEach(animal => animal.toHtml());
+  Animal.allAnimals.forEach(animal => animal.render());
 }
-$(() => Animal.readJSON('./data/page-1.json'));// anonymous function that kicks everything off
+$(() => Animal.readJSON());
 $('select').on('change',function() { //event delegatrion
   let selectedAnimal= $(this).val(); //variable that holds selected value
   $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
   $('.'+selectedAnimal).show(); //shows what is selected
 });
-$(() => Animal.readJSON('./data/page-2.json'));// anonymous function that kicks everything off
-$('select').on('change',function() { //event delegatrion
-  let selectedAnimal= $(this).val(); //variable that holds selected value
-  $(`div`).not('.'+selectedAnimal).hide(); //hides what is not selected
-  $('.'+selectedAnimal).show(); //shows what is selected
+$('#file1').on('click',function() { //event delegatrion
+  let selectP1 = $(this).val();
+  $('./data/page-2.json').hide();
 });
+
+
 
 
